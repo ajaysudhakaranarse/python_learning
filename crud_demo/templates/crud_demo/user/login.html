@@ -1,0 +1,20 @@
+{% load static %}
+<html>
+  <head>
+    <link rel="stylesheet" href="{% static 'css/book/index.css' %}">
+    <link rel="stylesheet" href="{% static 'css/user/login.css' %}">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+  <form action="{%url 'crud_demo:user_login'%}" method="POST">{% csrf_token %}
+    <div class="container log_form" style="background-color:black">
+      <h1 class="login_header">Sign In</h1>
+      <label for="uname"><b>Username</b></label>
+      <input type="text" class="form-control" name="username">
+      
+      <label for="uname" class="lable_name"><b>Password</b></label>
+      <input type="password" class="form-control" name="password">
+      
+      <button type="submit" class="login_btn">Sign In</button>
+    </div>
+  </form>
+</html>
