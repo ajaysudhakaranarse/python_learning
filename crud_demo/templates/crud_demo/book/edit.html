@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  </head>
+  <body>
+    {%include 'crud_demo/book/header.html'%}
+    <div class="container">
+      <h1><b> Edit Book </b><h1>
+      <form action="{%url 'crud_demo:book_edit' user_id book.id%}" method="POST">{% csrf_token %}
+        <label>Name</label>
+        <input type="text" class="form-control" name="book_name" value="{{book.name}}" required=true style="width:30%">
+        <label for="uname"><b>Author</b></label>
+        <input type="text" class="form-control" name="author_name" value="{{book.author}}" style="width:30%">
+        <button type="submit" class="btn btn-success" style="margin-top:10px">Submit</button>
+        <a href="{%url 'crud_demo:books_list' user_id%}" class="btn btn-info" style="margin-top:10px">Back</a>
+      </form>
+    </div>
+  </body>
+</html>

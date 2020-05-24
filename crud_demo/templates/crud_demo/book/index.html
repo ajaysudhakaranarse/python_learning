@@ -3,30 +3,32 @@
   <head>
     <link rel="stylesheet" href="{% static 'css/book/index.css' %}">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-inverse">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">Crud Demo</a>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li><a href="#"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
-        </ul>
-      </div>
-    </nav>
+    {%include 'crud_demo/book/header.html'%}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags == 'success'%}
+                <script>M.toast({html: "{{message}}", classes: 'green rounded', displayLength:2000});</script>
+            {% elif message.tags == 'error'%}
+                <script>M.toast({html: "{{message}}", classes: 'red rounded', displayLength:10000});</script>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
     <div class="container">
-      <h1>Books</h1>
+      <h1><b>Books</b></h1>
       <form>
         <table class="table table-striped">
           <thead>
             <tr>
-              <th>Book</th>
+              <th>Name</th>
               <th>Author</th>
               <th>
-                <a href="#" class="add_book" data-toggle="modal" data-target="#add_book_modal">
+                <a href="{% url 'crud_demo:book_add' user_id%}" class="add_book" data-toggle="tooltip" data-placement="bottom" title="Add book">
                   <span class="glyphicon glyphicon-plus"></span>
                 </a>
               </th>
@@ -37,33 +39,21 @@
             <tr>
               <td>{{book.name}}</td>
               <td>{{book.author}}</td>
+              <td>
+                <a href="{% url 'crud_demo:book_edit' user_id book.id%}" class="add_book" data-toggle="tooltip" data-placement="bottom" title="Edit book">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </a>
+              </td>
+              <td>
+                <a href="{% url 'crud_demo:book_remove' user_id book.id%}" class="add_book" data-toggle="tooltip" data-placement="bottom" title="Delete book">
+                  <span class="glyphicon glyphicon-remove"></span>
+                </a>
+              </td>
             </tr>
             {%endfor%}
           </tbody>
         </table>
       <form>
     </div>
-    <div class="modal fade" id="add_book_modal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Book</h4>
-        </div>
-        <div class="modal-body">
-          <label for="uname"><b>Name</b></label>
-          <input type="text" class="form-control" name="book_name">
-          <label for="uname"><b>Author</b></label>
-          <input type="text" class="form-control" name="author_name">
-        </div>
-        <div class="modal-footer">
-          <button type="submit" class="btn btn-info">Submit</button>
-        </div>
-      </div>
-      
-    </div>
-  </div>
   </body>
 </html>
