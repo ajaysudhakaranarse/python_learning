@@ -1,1 +1,1 @@
-web: gunicorn crud_demo.wsgi --log-file -
+web: gunicorn python_learning.wsgi --log-file -
